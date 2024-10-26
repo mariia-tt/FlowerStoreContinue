@@ -19,7 +19,7 @@ public class FlowerController {
     private Double SEPARALLENGHTTWO = 6.0;
     private Double PRICETWO = 7.5;
 
-    @GetMapping
+    @GetMapping("/flower")
     public List<Flower> getFlowers() {
         return Arrays.asList(
             new Flower(SEPARALLENGHTONE, FlowerColor.RED, PRICEONE,

@@ -18,11 +18,11 @@ public class PostDeliveryStrategyTest {
         deliveryStrategy = new PostDeliveryStrategy();
     }
 
-    int priceOne = 200;
-    int priceTwo = 30;
-    int priceWithDelivery = 200;
-    Double expected = 2.0;
-    Double delta = 0.01;
+    private static final int priceOne = 200;
+    private static final int priceTwo = 30;
+    private static final int priceWithDelivery = 200;
+    private static final Double expected = 2.0;
+    private static final Double delta = 0.01;
 
     @Test
     public void testDeliveryCost() {

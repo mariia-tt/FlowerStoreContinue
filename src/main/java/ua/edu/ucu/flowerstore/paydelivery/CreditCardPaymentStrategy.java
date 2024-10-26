@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CreditCardPaymentStrategy implements Payment {
-    private final BufferedReader READER = new BufferedReader(
+    private final BufferedReader reader = new BufferedReader (
         new InputStreamReader(System.in));
-    CreditCard card;
+    private CreditCard card;
 
     @Override
     public void collectPaymentDetails() {
         try {
             System.out.print("Enter the card number: ");
-            String number = READER.readLine();
+            String number = reader.readLine();
             System.out.print("Enter the card expiration date 'mm/yy': ");
-            String date = READER.readLine();
+            String date = reader.readLine();
             System.out.print("Enter the CVV code: ");
-            String cvv = READER.readLine();
+            String cvv = reader.readLine();
 
             if (validateCard(number, cvv)) {
                 card = new CreditCard(number, date, cvv);
@@ -35,14 +35,14 @@ public class CreditCardPaymentStrategy implements Payment {
         return validateCardNumber(number) && validateCVV(cvv);
     }
 
-    boolean validateCardNumber(String number) {
+    private boolean validateCardNumber(String number) {
         return number.matches("\\d{16}");
     }
 
-    boolean validateCVV(String cvv) {
+    private boolean validateCVV(String cvv) {
         return cvv.matches("\\d{3,4}");
     }
-    
+
     @Override
     public boolean pay(int paymentAmount) {
         if (cardIsPresent()) {

@@ -12,11 +12,11 @@ import static org.junit.Assert.assertEquals;
 
 public class DHLDeliveryStrategyTest {
     private DHLDeliveryStrategy deliveryStrategy;
-    int priceOne = 100;
-    int priceWithDelivery = 100;
-    double expected = 2.0;
-    double delta = 0.01;
-    int priceTwo = 50;
+    private static final int priceOne = 100;
+    private static final int priceWithDelivery = 100;
+    private static final double expected = 2.0;
+    private static final double delta = 0.01;
+    private static final int priceTwo = 50;
 
     @Before
     public void setUp() {
