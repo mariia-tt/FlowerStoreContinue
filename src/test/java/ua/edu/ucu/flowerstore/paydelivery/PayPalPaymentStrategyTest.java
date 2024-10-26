@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
@@ -16,11 +15,11 @@ import org.mockito.Mockito;
 class PayPalPaymentStrategyTest {
 
     private PayPalPaymentStrategy payPalStrategy;
-    
-    private static final int wantedNumberOfInvocationsOne = 2;
-    private static final int wantedNumberOfInvocationsTwo = 4;
-    private static final int paymentAmountOne = 100;
-    private static final int paymentAmountTwo = 100;
+
+    private static final int WANTED_NUMBER_OF_INVOCATIONS_ONE = 2;
+    private static final int WANTED_NUMBER_OF_INVOCATIONS_TWO = 4;
+    private static final int PAYMENT_AMOUNT_ONE = 100;
+    private static final int PAYMENT_AMOUNT_TWO = 100;
 
     @Mock
     private BufferedReader mockReader;
@@ -48,8 +47,8 @@ class PayPalPaymentStrategyTest {
 
         payPalStrategy.collectPaymentDetails();
 
-        Mockito.verify(mockReader, Mockito.times(wantedNumberOfInvocationsOne))
-        .readLine();
+        Mockito.verify(mockReader, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE))
+                .readLine();
     }
 
     @Test
@@ -62,8 +61,8 @@ class PayPalPaymentStrategyTest {
 
         payPalStrategy.collectPaymentDetails();
 
-        Mockito.verify(mockReader, Mockito.times(wantedNumberOfInvocationsTwo))
-        .readLine();
+        Mockito.verify(mockReader, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_TWO))
+                .readLine();
     }
 
     @Test
@@ -72,12 +71,12 @@ class PayPalPaymentStrategyTest {
         signedInField.setAccessible(true);
         signedInField.set(payPalStrategy, true);
 
-        Assertions.assertTrue(payPalStrategy.pay(paymentAmountOne));
+        Assertions.assertTrue(payPalStrategy.pay(PAYMENT_AMOUNT_ONE));
     }
 
     @Test
     void testPayNotSignedIn() {
-        Assertions.assertFalse(payPalStrategy.pay(paymentAmountTwo));
+        Assertions.assertFalse(payPalStrategy.pay(PAYMENT_AMOUNT_TWO));
     }
 
     @Test

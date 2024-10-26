@@ -14,17 +14,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/flowers")
 public class FlowerController {
-    private Double SEPARALLENGHTONE = 5.5;
-    private Double PRICEONE = 10.0;
-    private Double SEPARALLENGHTTWO = 6.0;
-    private Double PRICETWO = 7.5;
+    private static final Double separalLenghtOne = 5.5;
+    private static final Double priceOne = 10.0;
+    private static final Double separalLenghtTwo = 6.0;
+    private static final Double priceTwo = 7.5;
 
     @GetMapping("/flower")
     public List<Flower> getFlowers() {
         return Arrays.asList(
-            new Flower(SEPARALLENGHTONE, FlowerColor.RED, PRICEONE,
+            new Flower(separalLenghtOne, FlowerColor.RED, priceOne,
              FlowerType.ROSE),
-            new Flower(SEPARALLENGHTTWO, FlowerColor.YELLOW, PRICETWO,
+            new Flower(separalLenghtTwo, FlowerColor.YELLOW, priceTwo,
              FlowerType.TULIP)
         );
     }

@@ -3,12 +3,8 @@ package ua.edu.ucu.flowerstore.paydelivery;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.edu.ucu.flowerstore.paydelivery.Item;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class PostDeliveryStrategyTest {
     private PostDeliveryStrategy deliveryStrategy;
@@ -18,25 +14,24 @@ public class PostDeliveryStrategyTest {
         deliveryStrategy = new PostDeliveryStrategy();
     }
 
-    private static final int priceOne = 200;
-    private static final int priceTwo = 30;
-    private static final int priceWithDelivery = 200;
-    private static final Double expected = 2.0;
-    private static final Double delta = 0.01;
+    private static final int PRICE_ONE = 200;
+    private static final int PRICE_TWO = 30;
+    private static final int PRICE_WITH_DELIVERY = 200;
+    private static final Double EXPECTED = 2.0;
+    private static final Double DELTA = 0.01;
 
     @Test
     public void testDeliveryCost() {
         List<Item> items = new ArrayList<>();
-        items.add(new MockItem(priceOne));
-        double cost = deliveryStrategy
-        .calculateDeliveryCost(priceWithDelivery);
-        assertEquals(expected, cost, delta);
+        items.add(new MockItem(PRICE_ONE));
+        double cost = deliveryStrategy.calculateDeliveryCost(PRICE_WITH_DELIVERY);
+        org.junit.Assert.assertEquals(EXPECTED, cost, DELTA);
     }
 
     @Test
     public void testDeliver() {
         List<Item> items = new ArrayList<>();
-        items.add(new MockItem(priceTwo));
+        items.add(new MockItem(PRICE_TWO));
         deliveryStrategy.deliver(items);
     }
 

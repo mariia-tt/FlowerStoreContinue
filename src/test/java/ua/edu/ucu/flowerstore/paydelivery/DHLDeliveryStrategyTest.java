@@ -3,8 +3,6 @@ package ua.edu.ucu.flowerstore.paydelivery;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.edu.ucu.flowerstore.paydelivery.Item;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +10,12 @@ import static org.junit.Assert.assertEquals;
 
 public class DHLDeliveryStrategyTest {
     private DHLDeliveryStrategy deliveryStrategy;
-    private static final int priceOne = 100;
-    private static final int priceWithDelivery = 100;
-    private static final double expected = 2.0;
-    private static final double delta = 0.01;
-    private static final int priceTwo = 50;
+
+    private static final int PRICE_ONE = 100;
+    private static final int PRICE_WITH_DELIVERY = 100;
+    private static final double EXPECTED = 2.0;
+    private static final double DELTA = 0.01;
+    private static final int PRICE_TWO = 50;
 
     @Before
     public void setUp() {
@@ -26,16 +25,16 @@ public class DHLDeliveryStrategyTest {
     @Test
     public void testDeliveryCost() {
         List<Item> items = new ArrayList<>();
-        items.add(new MockItem(priceOne));
-        double cost = deliveryStrategy.calculateDeliveryCost
-        (priceWithDelivery);
-        assertEquals(expected, cost, delta);
+        items.add(new MockItem(PRICE_ONE));
+        double cost = deliveryStrategy.calculateDeliveryCost(
+            PRICE_WITH_DELIVERY);
+        assertEquals(EXPECTED, cost, DELTA);
     }
 
     @Test
     public void testDeliver() {
         List<Item> items = new ArrayList<>();
-        items.add(new MockItem(priceTwo));
+        items.add(new MockItem(PRICE_TWO));
         deliveryStrategy.deliver(items);
     }
 

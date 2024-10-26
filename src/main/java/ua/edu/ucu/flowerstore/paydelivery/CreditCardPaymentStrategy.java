@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CreditCardPaymentStrategy implements Payment {
-    private final BufferedReader reader = new BufferedReader (
+    private final BufferedReader reader = new BufferedReader(
         new InputStreamReader(System.in));
     private CreditCard card;
 
@@ -47,7 +47,7 @@ public class CreditCardPaymentStrategy implements Payment {
     public boolean pay(int paymentAmount) {
         if (cardIsPresent()) {
             System.out.println("Paying " + paymentAmount
-             + " using Credit Card.");
+                + " using Credit Card.");
             card.setAmount(card.getAmount() - paymentAmount);
             return true;
         } else {
@@ -63,7 +63,7 @@ public class CreditCardPaymentStrategy implements Payment {
         return card;
     }
 
-    public void setCard(CreditCard card) {
-        this.card = card;
+    public void setCard(CreditCard newCard) {
+        this.card = newCard;
     }
 }

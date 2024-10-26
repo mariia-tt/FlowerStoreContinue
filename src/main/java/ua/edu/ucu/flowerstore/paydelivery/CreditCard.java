@@ -1,11 +1,11 @@
 package ua.edu.ucu.flowerstore.paydelivery;
 
 public class CreditCard {
+    private static final int initialAmount = 100000;
     private int amount;
     private String number;
     private String date;
-    private String cvv;
-    private static final int initialAmount = 100000; 
+    private String cvv; 
 
     CreditCard(String number, String date, String cvv) {
         this.amount = initialAmount;

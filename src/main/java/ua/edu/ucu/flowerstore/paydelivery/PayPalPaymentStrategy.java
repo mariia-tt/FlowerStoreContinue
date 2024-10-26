@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class PayPalPaymentStrategy implements Payment {
     private static final Map<String, String> DATA_BASE = new HashMap<>();
-    private final BufferedReader reader = new BufferedReader
-    (new InputStreamReader(System.in));
+    private final BufferedReader reader = new BufferedReader(
+        new InputStreamReader(System.in));
     private String email;
     private String password;
     private boolean signedIn;
@@ -23,8 +23,8 @@ public class PayPalPaymentStrategy implements Payment {
                 System.out.print("Enter the password: ");
                 password = reader.readLine();
                 if (verify()) {
-                    System.out.println
-                    ("Data verification has been successful.");
+                    System.out.println(
+                        "Data verification has been successful.");
                 } else {
                     System.out.println("Wrong email or password!");
                 }

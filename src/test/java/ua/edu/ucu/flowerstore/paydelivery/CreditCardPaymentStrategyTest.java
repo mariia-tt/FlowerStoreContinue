@@ -9,8 +9,8 @@ import org.mockito.Mockito;
 
 class CreditCardPaymentStrategyTest {
 
-    private static final int initialAmount = 1000;
-    private static final int defaultPaymentAmount = 500;
+    private static final int INITIAL_AMOUNT = 1000;
+    private static final int DEFAULT_PAYMENT_AMOUNT = 500;
 
     private CreditCardPaymentStrategy strategy;
 
@@ -27,60 +27,57 @@ class CreditCardPaymentStrategyTest {
     @Test
     void testValidateCardNumberValid() {
         Assertions.assertTrue(invokePrivateMethod("validateCardNumber",
-         "1234567890123456"));
+            "1234567890123456"));
     }
 
     @Test
     void testValidateCardNumberInvalid() {
         Assertions.assertFalse(invokePrivateMethod("validateCardNumber",
-         "12345"));
+            "12345"));
         Assertions.assertFalse(invokePrivateMethod("validateCardNumber",
-         "abcdefghijklmnop"));
+            "abcdefghijklmnop"));
     }
 
     @Test
     void testValidateCVVValid() {
-        Assertions.assertTrue(invokePrivateMethod("validateCVV",
-         "123"));
-        Assertions.assertTrue(invokePrivateMethod("validateCVV",
-         "1234"));
+        Assertions.assertTrue(invokePrivateMethod("validateCVV", "123"));
+        Assertions.assertTrue(invokePrivateMethod("validateCVV", "1234"));
     }
 
     @Test
     void testValidateCVVInvalid() {
-        Assertions.assertFalse(invokePrivateMethod("validateCVV",
-         "12"));
-        Assertions.assertFalse(invokePrivateMethod("validateCVV",
-         "12345"));
-        Assertions.assertFalse(invokePrivateMethod("validateCVV",
-         "abc"));
+        Assertions.assertFalse(invokePrivateMethod("validateCVV", "12"));
+        Assertions.assertFalse(invokePrivateMethod("validateCVV", "12345"));
+        Assertions.assertFalse(invokePrivateMethod("validateCVV", "abc"));
     }
 
     @Test
     void testPayCardPresent() {
-        Mockito.when(mockCard.getAmount()).thenReturn(initialAmount);
-        
-        boolean result = strategy.pay(defaultPaymentAmount);
+        Mockito.when(mockCard.getAmount()).thenReturn(INITIAL_AMOUNT);
+
+        boolean result = strategy.pay(DEFAULT_PAYMENT_AMOUNT);
 
         Assertions.assertTrue(result);
-        Mockito.verify(mockCard).setAmount(initialAmount - defaultPaymentAmount);
+        Mockito.verify(mockCard).setAmount(INITIAL_AMOUNT - DEFAULT_PAYMENT_AMOUNT);
     }
 
     @Test
     void testPayCardNotPresent() {
         strategy.setCard(null);
 
-        boolean result = strategy.pay(defaultPaymentAmount);
+        boolean result = strategy.pay(DEFAULT_PAYMENT_AMOUNT);
 
         Assertions.assertFalse(result);
     }
 
     private boolean invokePrivateMethod(String methodName, String parameter) {
         try {
-            var method = CreditCardPaymentStrategy.class.getDeclaredMethod(methodName,
-             String.class);
+            var method = CreditCardPaymentStrategy.class.getDeclaredMethod(methodName, String.class);
             method.setAccessible(true);
             return (boolean) method.invoke(strategy, parameter);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
