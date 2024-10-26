@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.lang.reflect.InvocationTargetException;
+
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 
@@ -32,8 +35,7 @@ class CreditCardPaymentStrategyTest {
 
     @Test
     void testValidateCardNumberInvalid() {
-        Assertions.assertFalse(invokePrivateMethod("validateCardNumber",
-            "12345"));
+        Assertions.assertFalse(invokePrivateMethod("validateCardNumber", "12345"));
         Assertions.assertFalse(invokePrivateMethod("validateCardNumber",
             "abcdefghijklmnop"));
     }
@@ -72,13 +74,14 @@ class CreditCardPaymentStrategyTest {
 
     private boolean invokePrivateMethod(String methodName, String parameter) {
         try {
-            var method = CreditCardPaymentStrategy.class.getDeclaredMethod(methodName, String.class);
+            var method = CreditCardPaymentStrategy.class
+                .getDeclaredMethod(methodName, String.class);
             method.setAccessible(true);
             return (boolean) method.invoke(strategy, parameter);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return false;
-        } catch (Exception e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             return false;
         }

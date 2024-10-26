@@ -14,12 +14,12 @@ import org.mockito.Mockito;
 @ExtendWith(MockitoExtension.class)
 class PayPalPaymentStrategyTest {
 
-    private PayPalPaymentStrategy payPalStrategy;
-
     private static final int WANTED_NUMBER_OF_INVOCATIONS_ONE = 2;
     private static final int WANTED_NUMBER_OF_INVOCATIONS_TWO = 4;
     private static final int PAYMENT_AMOUNT_ONE = 100;
     private static final int PAYMENT_AMOUNT_TWO = 100;
+
+    private PayPalPaymentStrategy payPalStrategy;
 
     @Mock
     private BufferedReader mockReader;
@@ -28,13 +28,16 @@ class PayPalPaymentStrategyTest {
     void setUp() throws Exception {
         payPalStrategy = new PayPalPaymentStrategy();
 
-        var readerField = PayPalPaymentStrategy.class.getDeclaredField("reader");
+        var readerField = PayPalPaymentStrategy.class
+        .getDeclaredField("reader");
         readerField.setAccessible(true);
         readerField.set(payPalStrategy, mockReader);
 
-        var dataBaseField = PayPalPaymentStrategy.class.getDeclaredField("DATA_BASE");
+        var dataBaseField = PayPalPaymentStrategy.class
+        .getDeclaredField("DATA_BASE");
         dataBaseField.setAccessible(true);
-        Map<String, String> dataBase = (Map<String, String>) dataBaseField.get(null);
+        Map<String, String> dataBase
+         = (Map<String, String>) dataBaseField.get(null);
         dataBase.clear();
         dataBase.put("password123", "test@example.com");
     }
@@ -47,12 +50,14 @@ class PayPalPaymentStrategyTest {
 
         payPalStrategy.collectPaymentDetails();
 
-        Mockito.verify(mockReader, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE))
+        Mockito.verify(mockReader, Mockito.times(
+            WANTED_NUMBER_OF_INVOCATIONS_ONE))
                 .readLine();
     }
 
     @Test
-    void testCollectPaymentDetailsFailedThenSuccessfulSignIn() throws IOException {
+    void testCollectPaymentDetailsFailedThenSuccessfulSignIn()
+     throws IOException {
         Mockito.when(mockReader.readLine())
                 .thenReturn("wrong@example.com")
                 .thenReturn("wrongpassword")
@@ -61,13 +66,15 @@ class PayPalPaymentStrategyTest {
 
         payPalStrategy.collectPaymentDetails();
 
-        Mockito.verify(mockReader, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_TWO))
+        Mockito.verify(mockReader, Mockito.times(
+            WANTED_NUMBER_OF_INVOCATIONS_TWO))
                 .readLine();
     }
 
     @Test
     void testPaySignedIn() throws Exception {
-        var signedInField = PayPalPaymentStrategy.class.getDeclaredField("signedIn");
+        var signedInField = PayPalPaymentStrategy.class
+        .getDeclaredField("signedIn");
         signedInField.setAccessible(true);
         signedInField.set(payPalStrategy, true);
 
@@ -81,8 +88,10 @@ class PayPalPaymentStrategyTest {
 
     @Test
     void testVerify() throws Exception {
-        var emailField = PayPalPaymentStrategy.class.getDeclaredField("email");
-        var passwordField = PayPalPaymentStrategy.class.getDeclaredField("password");
+        var emailField = PayPalPaymentStrategy.class
+        .getDeclaredField("email");
+        var passwordField = PayPalPaymentStrategy.class
+        .getDeclaredField("password");
         emailField.setAccessible(true);
         passwordField.setAccessible(true);
 
