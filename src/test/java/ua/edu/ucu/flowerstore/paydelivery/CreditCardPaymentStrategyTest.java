@@ -35,7 +35,8 @@ class CreditCardPaymentStrategyTest {
 
     @Test
     void testValidateCardNumberInvalid() {
-        Assertions.assertFalse(invokePrivateMethod("validateCardNumber", "12345"));
+        Assertions.assertFalse(invokePrivateMethod(
+            "validateCardNumber", "12345"));
         Assertions.assertFalse(invokePrivateMethod("validateCardNumber",
             "abcdefghijklmnop"));
     }
@@ -60,7 +61,8 @@ class CreditCardPaymentStrategyTest {
         boolean result = strategy.pay(DEFAULT_PAYMENT_AMOUNT);
 
         Assertions.assertTrue(result);
-        Mockito.verify(mockCard).setAmount(INITIAL_AMOUNT - DEFAULT_PAYMENT_AMOUNT);
+        Mockito.verify(mockCard).setAmount(INITIAL_AMOUNT
+         - DEFAULT_PAYMENT_AMOUNT);
     }
 
     @Test
